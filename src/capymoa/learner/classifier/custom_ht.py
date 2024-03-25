@@ -7,8 +7,8 @@ import moa.classifiers.trees as moa_trees
 from capymoa.stream import Schema
 
 
-class EFDT(MOAClassifier):
-    """Extremely Fast Decision Tree (EFDT) classifier.
+class CustomHT(MOAClassifier):
+    """Alternative implementation of Extremely Fast Decision Tree (EFDT) classifier.
 
     Also referred to as the Hoeffding AnyTime Tree (HATT) classifier. In practice,
     despite the name, EFDTs are typically slower than a vanilla Hoeffding Tree
@@ -39,6 +39,10 @@ class EFDT(MOAClassifier):
         `1 - delta`. Values closer to zero imply longer split decision delays.
     tau
         Threshold below which a split will be forced to break ties.
+    tau_reevaluate
+        Threshold below which a split will be forced to break ties during reevaluation.
+    relative_min_merit
+        Minimum information gain above which tie breaking occurs. Relative, will be multiplied by tau_reevaluate.
     leaf_prediction
         Prediction mechanism used at leafs.</br>
         - 'mc' - Majority Class</br>
@@ -77,49 +81,32 @@ class EFDT(MOAClassifier):
     """
 
     MAJORITY_CLASS = 0
-    NAIVE_BAYES = 1
-    NAIVE_BAYES_ADAPTIVE = 2
-
+    # NAIVE_BAYES = 1
+    # NAIVE_BAYES_ADAPTIVE = 2
 
     def __init__(
             self,
             schema: Schema | None = None,
             random_seed: int = 0,
             grace_period: int = 200,
-            min_samples_reevaluate: int = 200,
             split_criterion: str = "InfoGainSplitCriterion",
             confidence: float = 1e-3,
             tie_threshold: float = 0.05,
-            leaf_prediction: int = MAJORITY_CLASS,
-            nb_threshold: int = 0,
-            numeric_attribute_observer: str = "GaussianNumericAttributeClassObserver",
+            leaf_prediction: str = MAJORITY_CLASS,
             binary_split: bool = False,
             min_branch_fraction: float = 0.01,
             max_share_to_split: float = 0.99,
-            max_byte_size: float = 33554433,
-            memory_estimate_period: int = 1000000,
-            stop_mem_management: bool = True,
-            remove_poor_attrs: bool = False,
             disable_prepruning: bool = True,
     ):
-        # Example configuration string:
-        # "trees.EFDT -R 2001 -m 33554433 -n FIMTDDNumericAttributeClassObserver -e 10003000 -g 201 -s GiniSplitCriterion -c 0.002 -t 0.051 -b -z -r -p -l NB -q 1"
-
         mappings = {
             "grace_period": "-g",
-            "min_samples_reevaluate": "-R",
-            "max_byte_size": "-m",
             "numeric_attribute_observer": "-n",
-            "memory_estimate_period": "-e",
             "split_criterion": "-s",
             "confidence": "-c",
             "tie_threshold": "-t",
             "binary_split": "-b",
-            "stop_mem_management": "-z",
-            "remove_poor_attrs": "-r",
             "disable_prepruning": "-p",
             "leaf_prediction": "-l",
-            "nb_threshold": "-q"
         }
 
         config_str = ""
@@ -140,7 +127,7 @@ class EFDT(MOAClassifier):
                 str_extension = f"{mappings[key]} {set_value} "
             config_str += str_extension
 
-        super(EFDT, self).__init__(moa_learner=moa_trees.EFDT,
-                                   schema=schema,
-                                   CLI=config_str,
-                                   random_seed=random_seed)
+        super(CustomHT, self).__init__(moa_learner=moa_trees.CustomHT,
+                                         schema=schema,
+                                         CLI=config_str,
+                                         random_seed=random_seed)

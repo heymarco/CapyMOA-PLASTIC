@@ -168,7 +168,12 @@ cython_debug/
 # 
 # MOABridge
 # 
-src/capymoa/jar/moa.jar
+src/capymoa/jar/original_moa.jar
 condaenv.*.requirements.txt
 data
 notebooks/*.png
+
+results
+figures
+*.jar
+*.png

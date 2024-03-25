@@ -7,6 +7,8 @@ import os
 import random
 
 # Library imports
+from tqdm import tqdm
+
 from capymoa.stream.stream import NumpyStream
 from capymoa.learner.learners import ClassifierSSL
 
@@ -777,7 +779,8 @@ def test_then_train_evaluation_fast(
     return results
 
 
-def prequential_evaluation_fast(stream, learner, max_instances=None, window_size=1000):
+def prequential_evaluation_fast(stream, learner, max_instances=None, window_size=1000,
+                                record_tree_revisions=False, record_number_of_leaves=False):
     """
     Prequential evaluation fast.
     """
@@ -813,6 +816,8 @@ def prequential_evaluation_fast(stream, learner, max_instances=None, window_size
         windowed_evaluator.moa_evaluator,
         max_instances,
         window_size,
+        record_tree_revisions,
+        record_number_of_leaves
     )
 
     # Reset the windowed_evaluator result_windows
@@ -835,8 +840,10 @@ def prequential_evaluation_fast(stream, learner, max_instances=None, window_size
         "windowed": windowed_evaluator,
         "wallclock": elapsed_wallclock_time,
         "cpu_time": elapsed_cpu_time,
-        "max_instances":max_instances, 
-        "stream":stream,
+        "max_instances": max_instances,
+        "stream": stream,
+        "number_of_leaves": moa_results.numberOfLeaves,
+        "tree_revisions": moa_results.treeRevisionIndices,
     }
 
     return results
@@ -1012,7 +1019,7 @@ def prequential_SSL_evaluation_fast(
 
 # TODO: review if we want to keep this method.
 def prequential_evaluation_multiple_learners(
-    stream, learners, max_instances=None, window_size=1000
+    stream, learners, max_instances=None, window_size=1000, show_progress=True
 ):
     """
     Calculates the metrics cumulatively (i.e., test-then-train) and in a window-fashion (i.e., windowed prequential evaluation) for multiple streams and learners.
@@ -1026,7 +1033,9 @@ def prequential_evaluation_multiple_learners(
     for learner_name, learner in learners.items():
         results[learner_name] = {"learner": str(learner)}
 
-    for learner_name, learner in learners.items():
+    learners_iter = tqdm(learners.items()) if show_progress else learners.items()
+
+    for learner_name, learner in learners_iter:
         if stream.get_schema().is_classification():
             results[learner_name]["cumulative"] = ClassificationEvaluator(
                 schema=stream.get_schema(), window_size=window_size
