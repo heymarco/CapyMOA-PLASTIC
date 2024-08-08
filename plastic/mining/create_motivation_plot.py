@@ -10,8 +10,8 @@ matplotlib.use('TkAgg')
 import seaborn as sns
 
 matplotlib.rcParams['text.usetex'] = True
-matplotlib.rcParams['text.latex.preamble'] = r'\usepackage{mathptmx}'
-matplotlib.rc('font', family='serif')
+matplotlib.rcParams['text.latex.preamble'] = r'\usepackage{helvet}'
+matplotlib.rc('font', family='sans-serif')
 
 
 def plot(df: pd.DataFrame, x: str, y: str, ylabel="Accuracy [\%]") -> sns.FacetGrid:
@@ -23,8 +23,8 @@ def plot(df: pd.DataFrame, x: str, y: str, ylabel="Accuracy [\%]") -> sns.FacetG
         ax.set_ylabel(ylabel)
         ax.set_xlabel("\# instances")
     plt.tight_layout()
-    plt.gcf().set_size_inches(5.5, 1.5)
-    plt.subplots_adjust(top=0.795, bottom=0.266, right=0.987, left=0.096, wspace=.2, hspace=.5)
+    plt.gcf().set_size_inches(5, 1.5)
+    plt.subplots_adjust(top=0.795, bottom=0.28, right=0.987, left=0.12, wspace=.2, hspace=.5)
 
 
 if __name__ == '__main__':
@@ -44,9 +44,9 @@ if __name__ == '__main__':
     dataframe = pd.concat(all_dfs, ignore_index=True)
     grid = plot(dataframe, x="classified instances", y="classifications correct (percent)")
     plt.savefig(os.path.join(os.getcwd(), "figures", "motivation.pdf"))
-    # plt.show()
-
-    grid = plot(dataframe, x="classified instances", y="Number of leaves")
     plt.show()
+
+    # grid = plot(dataframe, x="classified instances", y="Number of leaves")
+    # plt.show()
 
 

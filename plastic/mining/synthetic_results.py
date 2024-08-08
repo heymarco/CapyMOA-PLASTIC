@@ -10,6 +10,11 @@ from plastic.mining.rw_results_unshuffled import add_average
 from util import get_palette, get_approaches_synthetic
 import seaborn as sns
 
+import matplotlib
+matplotlib.rcParams['text.usetex'] = True
+matplotlib.rcParams['text.latex.preamble'] = r'\usepackage{helvet}'
+matplotlib.rc('font', family='sans-serif')
+
 
 def add_diff_column(df: pd.DataFrame, column_to_differentiate) -> pd.Series:
     s = df[column_to_differentiate].diff()
