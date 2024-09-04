@@ -63,7 +63,7 @@ if __name__ == '__main__':
     pal = get_palette()
     pal["PLASTIC - EFDT"] = pal["PLASTIC-A"]
     grid = plot(df, x="\# instances", y=metric_to_plot, palette=pal, sharex=True,
-                errorbar=("pi", 100), col_wrap=3, figheight=5 * 2.8/4)
+                errorbar=("pi", 100), col_wrap=3, figheight=3.4)
 
     hlines = [
         [-5, 5],

@@ -22,7 +22,7 @@ def add_diff_column(df: pd.DataFrame, column_to_differentiate) -> pd.Series:
 
 
 if __name__ == '__main__':
-    alpha = 0.05
+    alpha = 0.01
 
     METRIC = "classifications correct (percent)"
     DATASET_COL = "id"
@@ -54,7 +54,6 @@ if __name__ == '__main__':
         ds = os.path.splitext(dataset_name)[0].split("_")[0]
         if ds == "STAGGER":
             continue
-
         filepath = os.path.join(main_result_dir, dataset_name)
         this_df = pd.read_parquet(filepath)
         this_df[DATASET_COL] = ds

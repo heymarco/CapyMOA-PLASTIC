@@ -19,7 +19,7 @@ def plot(df: pd.DataFrame, x: str, y: str, errorbar=None, palette=None, col_wrap
                        facet_kws={"sharex": sharex, "sharey": False}, lw=0.7, palette=palette)
     sns.move_legend(g, "upper center", title="", ncols=4)
     plt.tight_layout()
-    plt.gcf().set_size_inches(5.5, figheight)
+    plt.gcf().set_size_inches(9, figheight)
     plt.subplots_adjust(top=0.914, bottom=0.07, right=0.97, left=0.093, wspace=.2, hspace=.717)
     return g
 

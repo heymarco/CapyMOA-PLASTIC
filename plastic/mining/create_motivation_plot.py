@@ -42,6 +42,7 @@ if __name__ == '__main__':
         del df
 
     dataframe = pd.concat(all_dfs, ignore_index=True)
+    # dataframe = dataframe[dataframe["Approach"] != "PLASTIC"]
     grid = plot(dataframe, x="classified instances", y="classifications correct (percent)")
     plt.savefig(os.path.join(os.getcwd(), "figures", "motivation.pdf"))
     plt.show()

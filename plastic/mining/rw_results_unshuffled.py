@@ -7,6 +7,12 @@ from critdd import Diagram
 from pandas.io.formats.style import _highlight_value
 from scipy.stats import gmean
 
+import matplotlib
+matplotlib.use('TkAgg')
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 from util import get_palette, get_all_approaches, get_approaches_synthetic, get_all_approaches_wo_nochange, \
     get_rw_datasets_in_paper_order
 
@@ -50,7 +56,6 @@ if __name__ == '__main__':
 
     dataframe = pd.concat(dataframes, ignore_index=True)
 
-
     def add_avg_rank(df: pd.DataFrame):
         ranks = Diagram(
             df[get_all_approaches_wo_nochange()].dropna(axis=0).to_numpy(),
@@ -66,6 +71,14 @@ if __name__ == '__main__':
                       .mean()
                       # .drop(ORDER_COL, axis=1)
                       )
+
+    print(average_acc_df)
+    sns.barplot(average_acc_df,
+                x="Dataset", y="classifications correct (percent)",
+                hue="Approach"
+                )
+    plt.show()
+
     # average_acc_df.index = average_acc_df.index.droplevel(1)
     pivot = average_acc_df.reset_index().pivot(columns=APPROACH_COL, index=DATASET_COL, values=METRIC)
 
@@ -81,8 +94,6 @@ if __name__ == '__main__':
 
     pivot = pivot.loc[get_rw_datasets_in_paper_order(), get_all_approaches()]
     rt_pivot = rt_pivot.loc[get_rw_datasets_in_paper_order(), get_all_approaches()]
-
-    print(pivot.corr())
 
     print((pivot
            .dropna(axis=0)
