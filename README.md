@@ -1,3 +1,26 @@
+# CapyMOA-PLASTIC
+
+This code contains a python version of plastic using CapyMOA, and the scripts for running the experiments from the paper and plotting the results. The java code of plastic can be found under [github.com/heymarco/PLASTIC](https://github.com/heymarco/PLASTIC)
+
+## Abstract
+
+Commonly used incremental decision trees for mining data streams include Hoeffding Trees (HT) and Extremely Fast Decision Trees (EFDT). EFDT exhibits faster learning than HT. However, due to its split revision procedure, EFDT suffers from sudden and unpredictable accuracy decreases caused by subtree pruning. To overcome this, we propose PLASTIC, an incremental decision tree that restructures the otherwise pruned subtree. This is possible due to *decision tree plasticity*: one can alter a tree's structure without affecting its predictions. We conduct extensive evaluations comparing PLASTIC with state-of-the-art methods on synthetic and real-world data streams. 
+Our results show that PLASTIC improves EFDT's worst-case accuracy by up to 50 % and outperforms the current state of the art on real-world data. 
+We provide an open-source implementation of PLASTIC within the MOA framework for mining high-speed data streams.
+
+## Citing
+If you want to cite this paper, use
+```
+@inproceedings{heyden2024leveraging,
+  title={Leveraging Plasticity in Incremental Decision Trees},
+  author={Heyden, Marco and Gomes, Heitor Murilo and Fouch{\'e}, Edouard and Pfahringer, Bernhard and B{\"o}hm, Klemens},
+  booktitle={Joint European Conference on Machine Learning and Knowledge Discovery in Databases},
+  pages={38--54},
+  year={2024},
+  organization={Springer}
+}
+```
+
 # CapyMOA
 Python wrapper for MOA to allow efficient use of existing algorithms with a more modern API
 
