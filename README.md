@@ -13,7 +13,8 @@ We provide an open-source implementation of PLASTIC within the MOA framework for
 ## Running experiments
 To run our experiments, 
 1. build the moa jar in the MOA-repository mentioned above
-2. include the moa jar in this project under `src/capymoa/jar`
+2. include the moa jar in this project under `src/capymoa/jar/`
+
 3. run the scripts under `plastic/`
 
 ## Citing
