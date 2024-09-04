@@ -2,11 +2,19 @@
 
 This code contains a python version of plastic using CapyMOA, and the scripts for running the experiments from the paper and plotting the results. The java code of plastic can be found under [github.com/heymarco/PLASTIC](https://github.com/heymarco/PLASTIC)
 
+Access the paper via [link.springer.com/chapter/10.1007/978-3-031-70362-1_3](https://link.springer.com/chapter/10.1007/978-3-031-70362-1_3)
+
 ## Abstract
 
 Commonly used incremental decision trees for mining data streams include Hoeffding Trees (HT) and Extremely Fast Decision Trees (EFDT). EFDT exhibits faster learning than HT. However, due to its split revision procedure, EFDT suffers from sudden and unpredictable accuracy decreases caused by subtree pruning. To overcome this, we propose PLASTIC, an incremental decision tree that restructures the otherwise pruned subtree. This is possible due to *decision tree plasticity*: one can alter a tree's structure without affecting its predictions. We conduct extensive evaluations comparing PLASTIC with state-of-the-art methods on synthetic and real-world data streams. 
 Our results show that PLASTIC improves EFDT's worst-case accuracy by up to 50 % and outperforms the current state of the art on real-world data. 
 We provide an open-source implementation of PLASTIC within the MOA framework for mining high-speed data streams.
+
+## Running experiments
+To run our experiments, 
+1. build the moa jar in the MOA-repository mentioned above
+2. include the moa jar in this project under `src/capymoa/jar`
+3. run the scripts under `plastic/`
 
 ## Citing
 If you want to cite this paper, use
