@@ -47,7 +47,7 @@ if __name__ == '__main__':
                 data_path = os.path.join(data_dir, file)
                 filename = os.path.splitext(file)[0]
                 results_path = os.path.join(os.getcwd(), "results",
-                                            os.path.join("hopefully_final", dataset, v),  # rel_path_inside_data,
+                                            os.path.join("realworld", dataset, v),  # rel_path_inside_data,
                                             filename + ".parquet")
 
                 assert os.path.exists(data_path)

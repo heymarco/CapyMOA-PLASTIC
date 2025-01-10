@@ -30,7 +30,7 @@ if __name__ == '__main__':
     APPROACH_COL = "Approach"
     ORDER_COL = "Order"
 
-    rw_results_dir = os.path.join(os.getcwd(), "results", "hopefully_final")
+    rw_results_dir = os.path.join(os.getcwd(), "results", "realworld")
 
     all_dfs = []
     for file in os.listdir(rw_results_dir):

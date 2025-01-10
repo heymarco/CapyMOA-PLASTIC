@@ -32,7 +32,7 @@ if __name__ == '__main__':
     approach_order = {key: i for i, key in enumerate(get_all_approaches())}
 
     dataframes = []
-    main_result_dir = os.path.join(os.getcwd(), "results", "hopefully_final")
+    main_result_dir = os.path.join(os.getcwd(), "results", "realworld")
     for dataset_name in os.listdir(main_result_dir):
         if dataset_name == "aplastic":
             continue

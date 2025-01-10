@@ -30,7 +30,7 @@ if __name__ == '__main__':
     approach_order = {key: i for i, key in enumerate(get_all_approaches_wo_nochange())}
 
     dataframes = []
-    main_result_dir = os.path.join(os.getcwd(), "results", "hopefully_final")
+    main_result_dir = os.path.join(os.getcwd(), "results", "realworld")
     for dataset_name in os.listdir(main_result_dir):
         if dataset_name == "aplastic":
             continue
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     )
 
     dataframes = []
-    main_result_dir = os.path.join(os.getcwd(), "results", "hopefully_final")
+    main_result_dir = os.path.join(os.getcwd(), "results", "realworld")
     for dataset_name in os.listdir(main_result_dir):
         dataset_dir_unshuffled = os.path.join(main_result_dir, dataset_name, "unshuffled")
         ds = dataset_name.split("_")[0]
